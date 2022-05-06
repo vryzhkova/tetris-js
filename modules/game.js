@@ -96,7 +96,7 @@ export class Game {
             const row = tetromino[i];
 
             for (let j = 0; j < row.length; j++) {
-                if (row[j] === 'x') {
+                if (row[j] !== 'o') {
                     area[y + i][x + j] = tetromino[i][j];
                 }
             }
@@ -110,7 +110,7 @@ export class Game {
             for (let j = 0; j < tetromino[i].length; j++) {
                 if(tetromino[i][j] === 'o') continue;
 
-                if(!this.area[y + i] || !this.area[y + i][x + j] || this.area[y + i][x + j] === 'x') {
+                if(!this.area[y + i] || !this.area[y + i][x + j] || this.area[y + i][x + j] !== 'o') {
                     return false;
                 }
 
@@ -125,7 +125,7 @@ export class Game {
         for(let i = 0; i < tetromino.length; i++) {
             const row = tetromino[i];
             for (let j = 0; j < row.length; j++) {
-                if (row[j] === 'x') {
+                if (row[j] !== 'o') {
                     this.area[y + i][x + j] = tetromino[i][j];
                 }
             }

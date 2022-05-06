@@ -38,7 +38,7 @@ const showArea = (area) => {
 
         for(let x = 0; x < line.length; x++) {
             const block = line[x];
-            if(block === 'x') {
+            if(block !== 'o') {
                 context.fillStyle = colors[block];
                 context.strokeStyle = 'white';
                 context.fillRect(x * SIZE_BLOCK, y * SIZE_BLOCK, SIZE_BLOCK, SIZE_BLOCK);
