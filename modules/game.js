@@ -132,6 +132,7 @@ export class Game {
         }
 
         this.changeTetromino();
+        this.clearRow();
     }
 
     clearRow() {
@@ -145,7 +146,18 @@ export class Game {
                     countBlock += 1;
                 }
             }
+            if(!countBlock) break;
+
+            if(countBlock === COLUMNS) {
+                rows.unshift(i)
+            }
 
         }
+        
+        rows.forEach(i => {
+            this.area.splice(i, 1);
+            this.area.unshift(Array(COLUMNS).fill('o'));
+        })
+
     }
 }
