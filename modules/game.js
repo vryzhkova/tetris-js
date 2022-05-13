@@ -143,8 +143,9 @@ export class Game {
         }
 
         this.changeTetromino();
-        this.clearRow();
-
+        const countRow = this.clearRow();
+        this.calcScore(countRow);
+        this.updatePanels();
         this.gameOver = !this.checkOutPosition(this.activeTetromino.x, this.activeTetromino.y)
     }
 
@@ -172,5 +173,27 @@ export class Game {
             this.area.unshift(Array(COLUMNS).fill('o'));
         })
 
+        return rows.length;
+    }
+
+    calcScore(lines) {
+        this.score += this.points[lines];
+        this.lines += lines;
+        this.lvl = Math.floor(this.lines / 10) + 1;
+
+        if(this.score > this.record) {
+            this.record = this.score;
+            localStorage.setItem('tetris-record', this.score);
+        }
+    }
+
+    createUpdatePanels(showScore, showNextTetromino) {
+        showScore(this.lines, this.score, this.lvl, this.record);
+        showNextTetromino(this.nextTetromino.block);
+
+        this.updatePanels = () => {
+            showScore(this.lines, this.score, this.lvl, this.record);
+            showNextTetromino(this.nextTetromino.block);
+        }
     }
 }
